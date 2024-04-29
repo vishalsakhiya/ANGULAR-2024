@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <span class="header-text">Time Zone Convertor</span>
+</mat-toolbar>
+<div class="container">
+  <div class="container">
+    <div class="form-group">
+      <label for="timeZone">From TimeZone:</label>
+      <select name="timeZone" [(ngModel)]="FromZone" (change)="onTimeZoneChange($event)">
+        <option *ngFor="let timeZone of timeZones" [value]="timeZone">{{ timeZone }}</option>
+      </select>
+      <label for="timeZone">To TimeZone:</label>
+      <select name="timeZone" [(ngModel)]="ToZone" (change)="onTimeZoneChange($event)">
+        <option *ngFor="let timeZone of timeZones" [value]="timeZone">{{ timeZone }}</option>
+      </select>
+      <label for="userInputDate">Enter Date:</label>
+      <input type="datetime-local" id="userInputDate" [(ngModel)]="SelectedDate">
+      <p>Selected Date: {{ SelectedDate }}</p>
+    </div>
+    <button (click)="convertTime()">Convert Time</button>
+
+    <div *ngIf="conversionResult">
+      <p>Converted Date: {{ conversionResult.conversionResult.dateTime }}</p>
+    </div>
+    <mat-card class="result-card" *ngIf="selectedTz || tzDate">
+      <div *ngIf="convertedDateTime" class="result-secondary">
+        <p>Converted Date-Time: {{ convertedDateTime }}</p>
+      </div>
+    </mat-card>
+  </div>
